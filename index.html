@@ -1,0 +1,120 @@
+
+	<style>
+		.strenth{display:block;height:25px;width:200px;position:relative;border:1px solid #ccc;float:left;}
+		.running{background: -webkit-linear-gradient( left,#f2be8c,#fb371d);width:0px;height:25px;position:absolute;left:0;top:0;}
+		.startRunning{display:inline-block;float:left;margin-left:10px;}
+		
+		
+		.slideBar{width:80px;height:27px;float:left;margin-left:200px;}
+		.slideContent{width:80px;position:relative;overflow: hidden;z-index: 20;height:27px;margin:0 auto;}
+		.slideContent .slideMain{width:100000px;position:absolute;top:0;left:0px;}
+		.slideContent .slideMain .slider{width:78px;height:27px;border:0;float:left;display:inline-block;text-align:center;line-height:30px;background:#ccc;margin:1px;}
+	</style>
+		<%- partial('module/header',{currMenu:1}) %>
+		<div class="container">	
+			<div class="row-fluid">
+			  <div class="span10">
+				<div class="strenth">
+					<div class="running">
+					</div>
+				</div>
+				<button class="startRunning btn btn-primary btn-small" id="startRunning" value="蓄力" />蓄力</button>
+				
+				<div class="slideBar">
+					<div class="slideContent">
+						<div class="slideMain">
+							
+						</div>
+					</div>
+				</div>
+				
+			  </div>
+			</div>
+		</div>
+		<script>
+			//随即打乱
+			sections.sort(function(){ return 0.5 - Math.random() });
+			var slideDom = $('.slideMain');
+			$.each(sections,function(i,item){
+				var doms = $('<div class="slider">'+item+'</div>').appendTo(slideDom);
+			});
+		
+			var xuliWidth = 0;
+			var action = 'add';
+			var xuliDom = $('.running');
+			var timmer;
+			$('#startRunning').on('mousedown',function(){
+				//随即打乱
+				sections.sort(function(){ return 0.5 - Math.random() });
+				var sortHtml = '';
+				$.each(sections,function(i,item){
+					sortHtml += '<div class="slider">'+item+'</div>';
+					
+				});
+				slideDom.html(sortHtml);
+				
+				runXuli();
+			}).on('mouseup',function(){
+				clearTimeout(timmer);
+				startRunning();
+				
+				xuliDom.animate({'width':0},xuliWidth*50,'swing',function(){
+					completeRunning();
+				});
+			});
+			function runXuli(){
+				if(action == 'add'){
+					xuliWidth+=2;
+					if(xuliWidth==100){
+						action = 'del';
+					}
+				}
+				else{
+					xuliWidth-=2;
+					if(xuliWidth==0){
+						action = 'add';
+					}
+				}
+				xuliDom.css('width',xuliWidth+'%');
+				
+				timmer = setTimeout(function(){
+					runXuli();
+				},5);
+			}
+			function clearXuli(){
+				xuliWidth = 0;
+				action = 'add';
+			}
+			function completeRunning(){
+				clearXuli();
+				slideDom.stop();
+				
+				var left = slideLeft%domLen ;
+				if(left>=40){
+					slideLeft = slideLeft + domLen - left;
+				}
+				else{
+					slideLeft = slideLeft - left;
+				}
+				slideDom.animate({'left':slideLeft},1000,'swing',function(){
+					$('#startRunning').removeAttr('disabled');
+				});
+			}
+			var domCount =  $('.slider').length;
+			var domLen = 80;
+			var totalLen = (domCount-1) * domLen;
+			var slideTimmer;
+			var slideLeft = 0;
+			function startRunning(){
+				$('#startRunning').attr('disabled','disabled');
+				slideLeft-=5;
+				if(slideLeft+totalLen==0){
+					slideLeft = 5;
+					slideDom.css('left','0px');
+				}
+				var left = slideLeft;
+				slideDom.animate({'left':left},(100-xuliWidth)/3,'swing',function(){
+					startRunning();
+				});
+			}
+		</script>

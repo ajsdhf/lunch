@@ -1,0 +1,83 @@
+<style>
+	.draw{display: block;margin: 30px auto;width: 586px;height: 586px;position: relative;overflow: hidden;}
+	.drawContent{display: block;width: 586px;height: 586px;background: url(images/drawBg.png) no-repeat;position: relative;}
+	.drawBtn{display: block;width: 169px;height: 195px;background: url(images/drawBtn.png) no-repeat;position: absolute;top: 185px;left: 209px;z-index: 10;}
+	
+	[class*="angle"]{position: absolute;display: block;width:70px;text-align: center;}
+	.angle0{top:67px;left:295px;-webkit-transform: rotate(7deg);}
+	.angle1{top:110px;left:391px;-webkit-transform: rotate(35deg);}
+	.angle2{top:193px;left:462px;-webkit-transform: rotate(62deg);}
+	.angle3{top:294px;left:480px;-webkit-transform: rotate(90deg);}
+	.angle4{top:394px;left:449px;-webkit-transform: rotate(117deg);}
+	.angle5{top:471px;left:371px;-webkit-transform: rotate(146deg);}
+	.angle6{top:503px;left:270px;-webkit-transform: rotate(174deg);}
+	.angle7{top:487px;left:173px;-webkit-transform: rotate(201deg);}
+	.angle8{top:420px;left:88px;-webkit-transform: rotate(229deg);}
+	.angle9{top:327px;left:42px;-webkit-transform: rotate(257deg);}
+	.angle10{top:229px;left:44px;-webkit-transform: rotate(285deg);}
+	.angle11{top:133px;left:92px;-webkit-transform: rotate(312deg);}
+	.angle12{top:69px;left:192px;-webkit-transform: rotate(343deg);}
+</style>
+<%- partial('module/header',{currMenu:5}) %>
+<div class="container">
+	<div class="draw">
+		<div class="drawContent">
+		</div>
+		<a class="drawBtn" id="drawStart" href="javascript:void(0);">
+		</a>
+	</div>
+</div>
+<script>
+	var sectionCount = sections.length;	
+	var bigSection = sections ; 
+	var delCount = 13-sections.length;
+	var container = $('.drawContent');
+	
+	var angle = [19];
+	
+	//随即打乱
+	sections.sort(function(){ return 0.5 - Math.random() });
+	
+	for(var i = 0 ;i<delCount;i++ ){
+		bigSection.push(sections[i]);
+	}
+	
+	$.each(bigSection,function(i,item){
+		$('<span class="angle'+i+'">'+item+'</span>').appendTo(container);
+	});
+	
+	var lightItem = 0 ;
+	var lightTimer ;
+	var speed = 100;
+	var flag = true;
+	$('#drawStart').on('click',function(){
+		if(flag){
+			flag = false;
+			var time = randomNum(5000,10000);
+			startTiger();
+			setTimeout(function(){speed = 10;},1000);
+			setTimeout(function(){speed = 100;},time-2000);
+			setTimeout(function(){stopTiger();},time);
+			
+		}
+	});
+	
+	function startTiger(){
+		container.css({'-webkit-transform':'rotate('+lightItem+'deg)'});
+		lightItem+=9;
+		if(lightItem==360){
+			lightItem=0;
+		}
+		lightTimer = setTimeout(function(){startTiger();}, speed);
+	}
+	function stopTiger(){
+		lightItem = 0 ;
+		speed = 100;
+		clearTimeout(lightTimer);
+		flag = true;
+	}
+	
+	function randomNum(min,max){
+	    return Math.floor(min+Math.random()*(max-min));	
+	}
+</script>
