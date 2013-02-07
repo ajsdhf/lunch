@@ -1,9 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		
+		<link charset="utf-8" rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="all" />
+		<link charset="utf-8" rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css" media="all" />
+
+		<script src="js/jquery.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<title>随即抓取－午餐哪里吃</title>
+	</head>
+	<body>
 <style>
 	.catchContent{width: 100%;height:400px;background: #ccc;position: relative;}
 	.catchContent .item{width: 70px;height:30px;position: absolute;background: #fff;line-height: 30px;text-align: center;cursor: pointer; }
 	.startBtn{position: absolute;top:150px;left:48%;}
 </style>
-<%- partial('module/header',{currMenu:3}) %>
+<div class="navbar">
+		<div class="navbar-inner">
+				<a class="brand" href="#">午餐哪里吃</a>
+				<ul class="nav">
+				  <li><a href="/lunch/index.html">蓄力</a></li>
+				  <li><a href="/lunch/draw.html">转盘</a></li>
+				  <li class="active"><a href="/lunch/catch.html">随即抓取</a></li>
+				  <li><a href="/lunch/tiger.html">老虎机</a></li>
+				  <li><a href="/lunch/poker.html">扑克牌</a></li>
+				</ul>
+			</div>
+		</div>
 <div class="container">
 	<div class="catchContent">
 		<code id="selecting">选中了</code>
@@ -52,3 +76,5 @@
 		startCatching();
 	});
 </script>
+</body>
+</html>

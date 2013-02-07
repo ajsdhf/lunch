@@ -1,4 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		
+		<link charset="utf-8" rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="all" />
+		<link charset="utf-8" rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css" media="all" />
 
+		<script src="js/jquery.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<title>蓄力－午餐哪里吃</title>
+	</head>
+	<body>
 	<style>
 		.strenth{display:block;height:25px;width:200px;position:relative;border:1px solid #ccc;float:left;}
 		.running{background: -webkit-linear-gradient( left,#f2be8c,#fb371d);width:0px;height:25px;position:absolute;left:0;top:0;}
@@ -10,7 +22,18 @@
 		.slideContent .slideMain{width:100000px;position:absolute;top:0;left:0px;}
 		.slideContent .slideMain .slider{width:78px;height:27px;border:0;float:left;display:inline-block;text-align:center;line-height:30px;background:#ccc;margin:1px;}
 	</style>
-		<%- partial('module/header',{currMenu:1}) %>
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="#">午餐哪里吃</a>
+				<ul class="nav">
+				  <li class="active"><a href="/lunch/index.html">蓄力</a></li>
+				  <li><a href="/lunch/draw.html">转盘</a></li>
+				  <li><a href="/lunch/catch.html">随即抓取</a></li>
+				  <li><a href="/lunch/tiger.html">老虎机</a></li>
+				  <li><a href="/lunch/poker.html">扑克牌</a></li>
+				</ul>
+			</div>
+		</div>
 		<div class="container">	
 			<div class="row-fluid">
 			  <div class="span10">
@@ -118,3 +141,5 @@
 				});
 			}
 		</script>
+		</body>
+</html>

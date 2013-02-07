@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		
+		<link charset="utf-8" rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="all" />
+		<link charset="utf-8" rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css" media="all" />
+
+		<script src="js/jquery.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<title>转盘－午餐哪里吃</title>
+	</head>
+	<body>
 <style>
 	.draw{display: block;margin: 30px auto;width: 586px;height: 586px;position: relative;overflow: hidden;}
 	.drawContent{display: block;width: 586px;height: 586px;background: url(images/drawBg.png) no-repeat;position: relative;}
@@ -18,7 +31,19 @@
 	.angle11{top:133px;left:92px;-webkit-transform: rotate(312deg);}
 	.angle12{top:69px;left:192px;-webkit-transform: rotate(343deg);}
 </style>
-<%- partial('module/header',{currMenu:5}) %>
+<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="#">午餐哪里吃</a>
+				<ul class="nav">
+				  <li><a href="/lunch/index.html">蓄力</a></li>
+				  <li class="active"><a href="/lunch/draw.html">转盘</a></li>
+				  <li><a href="/lunch/catch.html">随即抓取</a></li>
+				  <li><a href="/lunch/tiger.html">老虎机</a></li>
+				  <li><a href="/lunch/poker.html">扑克牌</a></li>
+				</ul>
+			</div>
+		</div>
+
 <div class="container">
 	<div class="draw">
 		<div class="drawContent">
@@ -81,3 +106,5 @@
 	    return Math.floor(min+Math.random()*(max-min));	
 	}
 </script>
+</body>
+</html>
